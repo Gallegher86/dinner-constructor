@@ -26,11 +26,12 @@ public class Main {
                 case "3":
                     return;
             }
+            System.out.println("-".repeat(20));
         }
     }
 
     private static void printMenu() {
-        System.out.println("Вас приветствует конструктор обеда!");
+        System.out.println("Вас приветствует конструктор обедов!");
         System.out.println("Выберите команду:");
         System.out.println("1 - Добавить новое блюдо");
         System.out.println("2 - Сгенерировать комбинации блюд");
@@ -44,7 +45,6 @@ public class Main {
         String dishName = scanner.nextLine();
 
         dc.addNewDish(dishType, dishName);
-        //dc.check();// добавьте новое блюдо
     }
 
     private static void generateDishCombo() {
@@ -54,22 +54,19 @@ public class Main {
         int numberOfCombos = scanner.nextInt();
         scanner.nextLine();
 
+        System.out.println("В списке программы имеются следующие типы блюд: " + dc.dishTypes.keySet());
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
         String dishType = scanner.nextLine();
-        ArrayList<String> typesToRand= new ArrayList<>();
+        ArrayList<String> typesToRand = new ArrayList<>();
 
-        //реализуйте ввод типов блюд
         while (!dishType.isEmpty()) {
             if (dc.checkType(dishType)) {
                 dishType = scanner.nextLine();
             } else {
                 typesToRand.add(dishType);
-                System.out.println(typesToRand);
                 dishType = scanner.nextLine();
             }
         }
-
-        // сгенерируйте комбинации блюд и выведите на экран
-
+        dc.makeCombo(numberOfCombos, typesToRand);
     }
 }

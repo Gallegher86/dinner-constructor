@@ -17,7 +17,6 @@ public class DinnerConstructor {
             dishNames.add(dishName);
             dishTypes.put(dishType, dishNames);
         }
-
         System.out.println("Блюдо " + dishName + " добавлено в категорию " + dishType + ".");
     }
 
@@ -25,18 +24,27 @@ public class DinnerConstructor {
         Random rnd = new Random();
         ArrayList<ArrayList<String>> comboList = new ArrayList<>();
 
-        for (int i = 0; i < numberOfCombos; i++) {
-            ArrayList<String> randDishes = new ArrayList<>();
+        if (typesToRand.isEmpty()) {
+            System.out.println("В программу не введены типы блюд, для создания комбинаций, работа прекращена.");
+            return;
+        } else {
+            for (int i = 0; i < numberOfCombos; i++) {
+                ArrayList<String> comboDishes = new ArrayList<>();
 
-            for (String type : typesToRand) {
-                ArrayList<String> dishesToRand = dishTypes.get(type);
-                String dish = dishesToRand.get(rnd.nextInt(numberOfCombos));
-                randDishes.add(dish);
+                for (String type : typesToRand) {
+                    ArrayList<String> dishesToRand = dishTypes.get(type);
+                    String dish = dishesToRand.get(rnd.nextInt(dishesToRand.size()));
+                    comboDishes.add(dish);
+                }
+                comboList.add(comboDishes);
             }
-
-            comboList.add(randDishes);
         }
-
+        System.out.println("Из типов блюд " + typesToRand + " сформированы следующие комбинации:");
+        for (int i = 0; i < comboList.size(); i++) {
+            ArrayList<String> dishes = comboList.get(i);
+            System.out.println("Комбо " + (i + 1));
+            System.out.println(dishes);
+        }
     }
 
     boolean checkType(String dishType) {
@@ -47,12 +55,6 @@ public class DinnerConstructor {
                     "существующую категорию или пустую строку для завершения цикла");
             isNoType = true;
         }
-
         return isNoType;
     }
-
-    void check () {
-        System.out.println(dishTypes);
-    }
-
 }
