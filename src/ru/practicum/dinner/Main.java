@@ -68,7 +68,7 @@ public class Main {
         while (!dishType.isEmpty()) {
             if (dc.checkType(dishType)) {
                 System.out.println("Категории блюд " + dishType + " нет в базе программы.");
-                System.out.println("Пожалуйста, введите существующую категорию или пустую строку для завершения цикла");
+                System.out.println("Пожалуйста, введите существующую категорию или пустую строку для завершения цикла.");
             } else {
                 typesToRand.add(dishType);
             }
